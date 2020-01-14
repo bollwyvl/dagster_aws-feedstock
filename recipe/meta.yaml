@@ -1,13 +1,13 @@
 {% set name = "dagster_aws" %}
-{% set version = "0.6.6" %}
+{% set version = "0.6.7.post0" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 195f2d4c50c10fad0f0f8676c733ac1864b51854bb4b09175dbcdfa321b63cbd
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name|replace('_', '-') }}/{{ name|replace('_', '-') }}-{{ version }}.tar.gz"
+  sha256: 36f20b66af0bffad7f9cb5877178a6be11770d1af870552778011512f0da7db9
 
 build:
   number: 0
@@ -29,6 +29,9 @@ requirements:
     - terminaltables
 
 test:
+  requires:
+    - dagster_pyspark
+    - python <3.8.0a0
   imports:
     - dagster_aws
     - dagster_aws.cli
